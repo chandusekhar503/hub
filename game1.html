@@ -34,9 +34,10 @@
     const ctx = canvas.getContext("2d");
 
     function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight - 50; // leave space for title
-    }
+    // Half the width and height of the window
+    canvas.width = window.innerWidth / 2;
+    canvas.height = window.innerHeight / 2;
+  }
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
