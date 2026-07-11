@@ -36,13 +36,13 @@
     function resizeCanvas() {
     // Half the width and height of the window
     canvas.width = window.innerWidth / 2;
-    canvas.height = window.innerHeight / 2;
+    canvas.height = window.innerHeight;
   }
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    let player = { x: canvas.width/2 - 30, y: canvas.height - 60, width: 60, height: 10, speed: 50 };
-    let ball = { x: Math.random() * canvas.width, y: 0, radius: 10, speed: 4 };
+    let player = { x: canvas.width/2 - 30, y: canvas.height - 60, width: 60, height: 10, speed: 40 };
+    let ball = { x: Math.random() * canvas.width, y: 0, radius: 20, speed: 4 };
     let score = 0;
 
     // Keyboard controls
