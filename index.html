@@ -1,49 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chandrasekhar Hub</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #111827;
-        color: #f9fafb;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-      }
-
-      .box {
-        text-align: center;
-        padding: 2rem 3rem;
-        border: 1px solid #374151;
-        border-radius: 12px;
-        background: #1f2937;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      }
-
-      h1 {
-        margin: 0 0 0.5rem;
-        font-size: 2rem;
-      }
-
-      p {
-        margin: 0;
-        font-size: 1.1rem;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="box">
-      <h1>Chandrasekhar Hub</h1>
-      <p>Generate code for chandrasekhar hub.</p>
+<head>
+  <meta charset="UTF-8">
+  <title>Game Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('ps4-controller.avif') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .games-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .game-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px solid #fff;
+      border-radius: 10px;
+      width: 200px;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    .game-box:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .game-box a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>🎮 My Game Collection</h1>
+    <div class="games-container">
+      <div class="game-box">
+        <a href="game1.html">Game 1</a>
+      </div>
+      <div class="game-box">
+        <a href="game2.html">Game 2</a>
+      </div>
+      <div class="game-box">
+        <a href="game3.html">Game 3</a>
+      </div>
+      <div class="game-box">
+        <a href="game4.html">Game 4</a>
+      </div>
     </div>
-    <div class="box">
-      <h1>Game</h1>
-      <p>click to play game</p>
-    </div>
-  </body>
+  </div>
+</body>
 </html>
