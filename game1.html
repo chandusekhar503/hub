@@ -11,43 +11,51 @@
       font-family: Arial, sans-serif;
       color: #fff;
       text-align: center;
+      overflow: hidden; /* Prevent scrolling */
     }
     canvas {
       background: rgba(0,0,0,0.7);
       display: block;
-      margin: 20px auto;
+      margin: 0 auto;
       border: 2px solid #fff;
-      touch-action: none; /* Prevent scrolling while playing */
+      touch-action: none;
     }
     h1 {
-      margin-top: 20px;
+      margin: 10px;
     }
   </style>
 </head>
 <body>
   <h1>🎮 Catch the Ball!</h1>
-  <canvas id="gameCanvas" width="400" height="500"></canvas>
+  <canvas id="gameCanvas"></canvas>
 
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
 
-    let player = { x: 180, y: 450, width: 60, height: 10, speed: 5 };
-    let ball = { x: Math.random() * 380, y: 0, radius: 10, speed: 3 };
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight - 50; // leave space for title
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    let player = { x: canvas.width/2 - 30, y: canvas.height - 60, width: 60, height: 10, speed: 10 };
+    let ball = { x: Math.random() * canvas.width, y: 0, radius: 10, speed: 4 };
     let score = 0;
 
-    // Keyboard controls (desktop)
+    // Keyboard controls
     document.addEventListener("keydown", e => {
       if (e.key === "ArrowLeft") player.x -= player.speed;
       if (e.key === "ArrowRight") player.x += player.speed;
     });
 
-    // Touch controls (mobile)
+    // Touch controls
     canvas.addEventListener("touchmove", e => {
       const touch = e.touches[0];
       const rect = canvas.getBoundingClientRect();
       const touchX = touch.clientX - rect.left;
-      player.x = touchX - player.width / 2; // Center paddle on finger
+      player.x = touchX - player.width / 2;
     });
 
     function drawPlayer() {
@@ -65,8 +73,8 @@
 
     function drawScore() {
       ctx.fillStyle = "white";
-      ctx.font = "16px Arial";
-      ctx.fillText("Score: " + score, 10, 20);
+      ctx.font = "20px Arial";
+      ctx.fillText("Score: " + score, 10, 30);
     }
 
     function update() {
