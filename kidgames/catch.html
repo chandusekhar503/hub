@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Catch the Ball</title>
+  <style>
+    body { text-align: center; background: #f0f0f0; }
+    canvas { background: #fff; border: 2px solid #333; display: block; margin: 20px auto; }
+  </style>
+</head>
+<body>
+  <h1>⚽ Catch the Ball!</h1>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let basketX = 160;
+    let ball = { x: Math.random()*380, y: 0 };
+    let score = 0;
+
+    document.addEventListener("keydown", e => {
+      if(e.key==="ArrowLeft") basketX -= 20;
+      if(e.key==="ArrowRight") basketX += 20;
+    });
+
+    function draw() {
+      ctx.clearRect(0,0,400,400);
+
+      // Basket
+      ctx.fillStyle="blue";
+      ctx.fillRect(basketX, 350, 80, 20);
+
+      // Ball
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, 10, 0, Math.PI*2);
+      ctx.fillStyle="red";
+      ctx.fill();
+
+      // Move ball
+      ball.y += 5;
+      if(ball.y > 350 && ball.x > basketX && ball.x < basketX+80){
+        score++;
+        ball = { x: Math.random()*380, y: 0 };
+      }
+      if(ball.y > 400){
+        ball = { x: Math.random()*380, y: 0 };
+      }
+
+      // Score
+      ctx.fillStyle="black";
+      ctx.font="16px Arial";
+      ctx.fillText("Score: "+score, 10, 20);
+    }
+
+    setInterval(draw,50);
+  </script>
+</body>
+</html>

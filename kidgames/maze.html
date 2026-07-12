@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Maze Runner</title>
+  <style>
+    canvas { background:#eee; display:block; margin:20px auto; border:2px solid #333; }
+  </style>
+</head>
+<body>
+  <h1>🧩 Maze Runner</h1>
+  <canvas id="maze" width="400" height="400"></canvas>
+  <script>
+    const canvas=document.getElementById("maze");
+    const ctx=canvas.getContext("2d");
+    let player={x:20,y:20};
+    let goal={x:360,y:360};
+    let walls=[
+      {x:100,y:0,w:20,h:300},
+      {x:200,y:100,w:20,h:300},
+      {x:300,y:0,w:20,h:300}
+    ];
+    document.addEventListener("keydown",e=>{
+      let dx=0,dy=0;
+      if(e.key==="ArrowLeft") dx=-20;
+      if(e.key==="ArrowRight") dx=20;
+      if(e.key==="ArrowUp") dy=-20;
+      if(e.key==="ArrowDown") dy=20;
+      let newPos={x:player.x+dx,y:player.y+dy};
+      if(!walls.some(w=>newPos.x<w.x+w.w && newPos.x+20>w.x && newPos.y<w.y+w.h && newPos.y+20>w.y)){
+        player=newPos;
+      }
+    });
+    function draw(){
+      ctx.clearRect(0,0,400,400);
+      ctx.fillStyle="green"; ctx.fillRect(goal.x,goal.y,20,20);
+      ctx.fillStyle="red"; ctx.fillRect(player.x,player.y,20,20);
+      ctx.fillStyle="black"; walls.forEach(w=>ctx.fillRect(w.x,w.y,w.w,w.h));
+      if(player.x===goal.x && player.y===goal.y){
+        alert("You win!");
+        player={x:20,y:20};
+      }
+    }
+    setInterval(draw,100);
+  </script>
+</body>
+</html>
