@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Car Racing</title>
+  <style>
+    body { margin:0; background:#111; overflow:hidden; }
+    canvas { display:block; margin:0 auto; background:#333; }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <script>
+    const canvas=document.getElementById("gameCanvas");
+    const ctx=canvas.getContext("2d");
+
+    let roadWidth=200;
+    let carX=0;
+    let speed=0;
+    let trackPos=0;
+
+    document.addEventListener("keydown",e=>{
+      if(e.key==="ArrowLeft") carX-=10;
+      if(e.key==="ArrowRight") carX+=10;
+      if(e.key==="ArrowUp") speed+=2;
+      if(e.key==="ArrowDown") speed=Math.max(0,speed-2);
+    });
+
+    function drawRoad(){
+      ctx.fillStyle="#555";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      for(let i=0;i<30;i++){
+        let perspective=1/(i+1);
+        let roadCenter=canvas.width/2+Math.sin(trackPos/100)*100*perspective;
+        let halfWidth=roadWidth*perspective;
+        ctx.fillStyle=i%2===0?"#222":"#444";
+        ctx.beginPath();
+        ctx.moveTo(roadCenter-halfWidth,canvas.height-(i*20));
+        ctx.lineTo(roadCenter+halfWidth,canvas.height-(i*20));
+        ctx.lineTo(roadCenter+halfWidth,canvas.height-(i*20+20));
+        ctx.lineTo(roadCenter-halfWidth,canvas.height-(i*20+20));
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+
+    function drawCar(){
+      ctx.fillStyle="red";
+      ctx.fillRect(canvas.width/2-20+carX,canvas.height-80,40,60);
+    }
+
+    function loop(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      drawRoad();
+      drawCar();
+      trackPos+=speed;
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
+</body>
+</html>
